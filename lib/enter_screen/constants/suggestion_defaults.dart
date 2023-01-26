@@ -1,4 +1,4 @@
-import 'package:linum_enter_screen/input_parser/enums/input_flag.dart';
+import 'package:linum_enter_screen/enter_screen/enums/input_flag.dart';
 
 final flagSuggestionDefaults = {
   InputFlag.category: "enter_screen.input_flag.category",

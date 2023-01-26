@@ -1,7 +1,6 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:linum_enter_screen/input_parser/enums/week_day.dart';
+import 'package:linum_enter_screen/enter_screen/enums/week_day.dart';
 
-final parsableDateMap = <ParsableDate, String> {
+final parsableDateMap = <ParsableDate, String>{
   ParsableDate.sunday: "enter_screen.date.sunday",
   ParsableDate.monday: "enter_screen.date.monday",
   ParsableDate.tuesday: "enter_screen.date.tuesday",
@@ -14,7 +13,7 @@ final parsableDateMap = <ParsableDate, String> {
   ParsableDate.today: "enter_screen.special_date.today"
 };
 
-final dateTimeWeekDayMap = <ParsableDate, int> {
+final dateTimeWeekDayMap = <ParsableDate, int>{
   ParsableDate.sunday: DateTime.sunday,
   ParsableDate.monday: DateTime.monday,
   ParsableDate.tuesday: DateTime.tuesday,
@@ -23,5 +22,3 @@ final dateTimeWeekDayMap = <ParsableDate, int> {
   ParsableDate.friday: DateTime.friday,
   ParsableDate.saturday: DateTime.saturday,
 };
-
-

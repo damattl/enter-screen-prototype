@@ -4,7 +4,7 @@
 //  Co-Author: damattl
 //  (Refactored)
 
-import 'package:linum_enter_screen/input_parser/models/currency.dart';
+import 'package:linum_enter_screen/enter_screen/models/currency.dart';
 
 final standardCurrencies = Map<String, Currency>.unmodifiable({
   "EUR": const Currency(

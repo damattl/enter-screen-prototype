@@ -1,33 +1,31 @@
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:linum_enter_screen/input_parser/constants/input_flag_map.dart';
-import 'package:linum_enter_screen/input_parser/constants/standard_categories.dart';
-import 'package:linum_enter_screen/input_parser/constants/suggestion_defaults.dart';
-import 'package:linum_enter_screen/input_parser/constants/parsable_date_map.dart';
-import 'package:linum_enter_screen/input_parser/enums/input_flag.dart';
-import 'package:linum_enter_screen/input_parser/linum_input_parser.dart';
-import 'package:linum_enter_screen/input_parser/utils/supported_dates.dart';
+import 'package:linum_enter_screen/enter_screen/constants/input_flag_map.dart';
+import 'package:linum_enter_screen/enter_screen/constants/standard_categories.dart';
+import 'package:linum_enter_screen/enter_screen/constants/suggestion_defaults.dart';
+import 'package:linum_enter_screen/enter_screen/constants/parsable_date_map.dart';
+import 'package:linum_enter_screen/enter_screen/enums/input_flag.dart';
+import 'package:linum_enter_screen/enter_screen/utils/input_parser.dart';
+import 'package:linum_enter_screen/enter_screen/utils/supported_dates.dart';
 
-TextEditingValue insertSuggestion(MapEntry<String, String> entry, String oldText, int oldCursor) {
-  final translatedValue = entry.value.tr()
-      + (suggestionIsFlag(entry.key) ? ":" : "");
+TextEditingValue insertSuggestion(
+    MapEntry<String, String> entry, String oldText, int oldCursor) {
+  final translatedValue =
+      entry.value.tr() + (suggestionIsFlag(entry.key) ? ":" : "");
   final preCursorText = oldText.substring(0, oldCursor);
   final lastTagPosition = preCursorText.lastIndexOf(RegExp(r'[#@:]'));
 
   final cleanedPreCursorText = preCursorText.substring(0, lastTagPosition + 1);
 
-  final newText = cleanedPreCursorText
-      + translatedValue
-      + oldText.substring(oldCursor, oldText.length);
+  final newText = cleanedPreCursorText +
+      translatedValue +
+      oldText.substring(oldCursor, oldText.length);
 
   final newCursor = cleanedPreCursorText.length + translatedValue.length;
   return TextEditingValue(
       text: newText,
-      selection: TextSelection.fromPosition(
-          TextPosition(offset: newCursor)
-      )
-  );
+      selection: TextSelection.fromPosition(TextPosition(offset: newCursor)));
 }
 
 Map<String, String> makeSuggestions(String text, int cursor) {
@@ -36,7 +34,7 @@ Map<String, String> makeSuggestions(String text, int cursor) {
   if (textBefore.length == 1) {
     return {};
   }
-  final preCursorText = textBefore[textBefore.length-1];
+  final preCursorText = textBefore[textBefore.length - 1];
   final cursorText = preCursorText + textAfter[0];
 
   final parsed = parseTag(preCursorText);
@@ -49,7 +47,7 @@ Map<String, String> makeSuggestions(String text, int cursor) {
     }
   }
 
-  switch(parsed.item1) {
+  switch (parsed.item1) {
     case InputFlag.category:
       return suggestCategory(parsed.item2);
     case InputFlag.date:
@@ -59,7 +57,6 @@ Map<String, String> makeSuggestions(String text, int cursor) {
     default:
       return suggestCategory(parsed.item2);
   }
-
 }
 
 Map<String, String> suggestFlags(String text) {
@@ -111,8 +108,8 @@ Map<String, String> suggestDate(String text) {
     }
 
     if (substr == lowercase && parsableDateMap[entry.value] != null) {
-
-      suggestions[entry.value.name] = parsableDateMap[entry.value]!.tr(); // TODO: Convert back to parsableDateMap
+      suggestions[entry.value.name] = parsableDateMap[entry.value]!
+          .tr(); // TODO: Convert back to parsableDateMap
     }
   }
 

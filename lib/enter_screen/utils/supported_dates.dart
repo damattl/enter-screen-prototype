@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:linum_enter_screen/input_parser/constants/parsable_date_map.dart';
-import 'package:linum_enter_screen/input_parser/enums/week_day.dart';
+import 'package:linum_enter_screen/enter_screen/constants/parsable_date_map.dart';
+import 'package:linum_enter_screen/enter_screen/enums/week_day.dart';
 
-final supportedDates = <String, ParsableDate> {
+final supportedDates = <String, ParsableDate>{
   "tmrw": ParsableDate.tomorrow,
   "tmr": ParsableDate.tomorrow,
 };

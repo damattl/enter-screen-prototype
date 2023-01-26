@@ -1,13 +1,9 @@
-import 'package:linum_enter_screen/input_parser/constants/input_flag_map.dart';
-import 'package:linum_enter_screen/input_parser/constants/parser_functions.dart';
-import 'package:linum_enter_screen/input_parser/constants/standard_categories.dart';
-import 'package:linum_enter_screen/input_parser/enums/input_flag.dart';
-import 'package:linum_enter_screen/input_parser/models/enter_screen_input.dart';
-import 'package:linum_enter_screen/input_parser/utils/amount_parsing.dart';
+import 'package:linum_enter_screen/enter_screen/constants/input_flag_map.dart';
+import 'package:linum_enter_screen/enter_screen/utils/parser_functions.dart';
+import 'package:linum_enter_screen/enter_screen/enums/input_flag.dart';
+import 'package:linum_enter_screen/enter_screen/models/enter_screen_input.dart';
+import 'package:linum_enter_screen/enter_screen/utils/amount_parsing.dart';
 import 'package:tuple/tuple.dart';
-
-
-
 
 List<String> splitInput(String input) {
   final splitsByHashtag = input.split("#");
@@ -43,7 +39,7 @@ EnterScreenInput parse(String? input) {
     }
   }
   print("${result.name ?? "No name"}: ${result.amount} ${result.currency}");
-  for(final tag in result.parsedInputs) {
+  for (final tag in result.parsedInputs) {
     print(tag);
   }
   return result;

@@ -1,8 +1,6 @@
+import 'package:linum_enter_screen/enter_screen/models/category.dart';
 
-
-import 'package:linum_enter_screen/input_parser/models/category.dart';
-
-const standardCategories = <String, Category> {
+const standardCategories = <String, Category>{
   "salary": Category(
     label: "settings_screen.standard-income-selector.salary",
     id: "salary",
@@ -24,16 +22,13 @@ const standardCategories = <String, Category> {
     isIncome: true,
   ),
   "childsupport": Category(
-    label: "settings_screen.standard-income-selector.childsupport",
-    id: "childsupport",
-    isIncome: true
-  ),
+      label: "settings_screen.standard-income-selector.childsupport",
+      id: "childsupport",
+      isIncome: true),
   "interest": Category(
-    label: "settings_screen.standard-income-selector.interest",
-    id: "interest",
-    isIncome: true
-  ),
-
+      label: "settings_screen.standard-income-selector.interest",
+      id: "interest",
+      isIncome: true),
   "food": Category(
     label: "settings_screen.standard-expense-selector.food",
     id: "food",
@@ -54,15 +49,12 @@ const standardCategories = <String, Category> {
     label: "settings_screen.standard-expense-selector.car",
     id: "car",
   ),
-
   "misc-income": Category(
     label: "settings_screen.standard-income-selector.misc",
     id: "misc-income",
-
   ),
   "misc-expense": Category(
     label: "settings_screen.standard-expense-selector.misc",
     id: "misc-expense",
-
   ),
 };

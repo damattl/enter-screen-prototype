@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
-import 'package:linum_enter_screen/input_parser/constants/standard_currencies.dart';
-import 'package:linum_enter_screen/input_parser/models/enter_screen_input.dart';
+import 'package:linum_enter_screen/enter_screen/constants/standard_currencies.dart';
+import 'package:linum_enter_screen/enter_screen/models/enter_screen_input.dart';
 
 final amountRegex = RegExp(
   r'([a-zA-Z\p{Sc}]{0,3}) ?([0-9]+[,.]?(?:[0-9]{1,2})?) ?([a-zA-Z\p{Sc}]{0,3})(?: (.{0,140}))?$',
@@ -10,7 +10,8 @@ final amountRegex = RegExp(
 EnterScreenInput parseAmount(String input, String raw) {
   final matches = amountRegex.allMatches(input).toList();
   if (matches.isEmpty) {
-    return EnterScreenInput(raw, currency: "EUR"); // TODO: find a better way
+    return EnterScreenInput(raw, currency: "EUR");
+    // TODO: find a better way
   }
   final match = matches.toList()[0];
 
@@ -22,14 +23,15 @@ EnterScreenInput parseAmount(String input, String raw) {
   }
   final name = match.group(4)?.trim();
 
-
   if (currency != null) {
     var cur = standardCurrencies[currency];
     if (cur == null) {
       if (currency == "\$") {
         currency = "US\$";
       }
-      currency = standardCurrencies.entries.firstWhereOrNull((element) => element.value.symbol == currency)?.key;
+      currency = standardCurrencies.entries
+          .firstWhereOrNull((element) => element.value.symbol == currency)
+          ?.key;
     }
   }
 

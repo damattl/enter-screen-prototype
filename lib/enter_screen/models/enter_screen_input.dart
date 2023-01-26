@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
-import 'package:linum_enter_screen/input_parser/enums/input_flag.dart';
+import 'package:linum_enter_screen/enter_screen/enums/input_flag.dart';
 import 'package:tuple/tuple.dart';
-
 
 class EnterScreenInput {
   final String raw;
@@ -10,7 +9,8 @@ class EnterScreenInput {
   final String? name;
   final parsedInputs = <Tuple2<InputFlag, String>>[];
 
-  EnterScreenInput(this.raw, {
+  EnterScreenInput(
+    this.raw, {
     this.amount,
     this.name,
     this.currency,
@@ -20,10 +20,11 @@ class EnterScreenInput {
   bool get hasCurrency => currency != null;
   bool get hasName => name != null;
   bool get hasCategory =>
-      parsedInputs.firstWhereOrNull((t) => t.item1 == InputFlag.category) != null;
+      parsedInputs.firstWhereOrNull((t) => t.item1 == InputFlag.category) !=
+      null;
   bool get hasDate =>
       parsedInputs.firstWhereOrNull((t) => t.item1 == InputFlag.date) != null;
   bool get hasRepeatInfo =>
-      parsedInputs.firstWhereOrNull((t) => t.item1 == InputFlag.category) != null;
-
+      parsedInputs.firstWhereOrNull((t) => t.item1 == InputFlag.category) !=
+      null;
 }

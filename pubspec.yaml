@@ -39,6 +39,7 @@ dependencies:
   tuple: ^2.0.1
   collection: ^1.16.0
   easy_localization: ^3.0.1
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:
