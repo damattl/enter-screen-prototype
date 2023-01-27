@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:linum_enter_screen/enter_screen/constants/suggestion_defaults.dart';
 import 'package:linum_enter_screen/enter_screen/enums/input_flag.dart';
 import 'package:linum_enter_screen/enter_screen/models/enter_screen_input.dart';
+import 'package:linum_enter_screen/enter_screen/utils/input_parser.dart';
 import 'package:tuple/tuple.dart';
 
 class ExampleStringBuilder {
@@ -46,20 +47,22 @@ class ExampleStringBuilder {
         "${_buildDateString()} "
         "${_buildRepeatInfoString()}";
     value = Tuple2("", str2);
-    // 0,00 € Name #Kategorie:Keine #Datum:Heute
-    // 30,0 USD #Datum:Gestern #Kategorie:Einnahmen
-    // 30,0 USD #Datum:Gestern '#Kategorie:Keine'
   }
 
   void rebuild(EnterScreenInput parsed) {
-    print(parsed.raw);
+    if (parsed.raw == "") {
+      build();
+      return;
+    }
 
-    final str2 = "${parsed.hasAmount ? "" : "$defaultAmount "}"
-        "${parsed.hasCurrency ? "" : "$defaultCurrency "} "
-        "${parsed.hasName ? "" : "$defaultName "} "
-        "${parsed.hasCategory ? "" : "${_buildCategoryString()} "}"
-        "${parsed.hasDate ? "" : "${_buildDateString()} "}"
-        "${parsed.hasRepeatInfo ? "" : "${_buildRepeatInfoString()} "}";
+    final str2 = (parsed.hasAmount ? "" : "$defaultAmount ") +
+        (parsed.raw.endsWith(" ") && parsed.hasAmount ? "" : " ") +
+        (parsed.hasName ? "" : "$defaultName ") +
+        (parsed.raw.contains('#')
+            ? ""
+            : "${parsed.hasCategory ? "" : "${_buildCategoryString()} "}"
+                "${parsed.hasDate ? "" : "${_buildDateString()} "}"
+                "${parsed.hasRepeatInfo ? "" : "${_buildRepeatInfoString()} "}");
     value = Tuple2(parsed.raw, str2);
   }
 }

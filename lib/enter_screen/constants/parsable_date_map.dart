@@ -1,4 +1,4 @@
-import 'package:linum_enter_screen/enter_screen/enums/week_day.dart';
+import 'package:linum_enter_screen/enter_screen/enums/parsable_date.dart';
 
 final parsableDateMap = <ParsableDate, String>{
   ParsableDate.sunday: "enter_screen.date.sunday",

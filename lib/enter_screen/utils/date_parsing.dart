@@ -1,5 +1,5 @@
 import 'package:linum_enter_screen/enter_screen/constants/parsable_date_map.dart';
-import 'package:linum_enter_screen/enter_screen/enums/week_day.dart';
+import 'package:linum_enter_screen/enter_screen/enums/parsable_date.dart';
 
 final _dateRegExps = <String, RegExp>{
   "d/m/y": RegExp(

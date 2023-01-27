@@ -3,11 +3,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:linum_enter_screen/enter_screen/constants/input_flag_map.dart';
 import 'package:linum_enter_screen/enter_screen/constants/standard_categories.dart';
+import 'package:linum_enter_screen/enter_screen/constants/standard_repeat_configs.dart';
 import 'package:linum_enter_screen/enter_screen/constants/suggestion_defaults.dart';
 import 'package:linum_enter_screen/enter_screen/constants/parsable_date_map.dart';
 import 'package:linum_enter_screen/enter_screen/enums/input_flag.dart';
 import 'package:linum_enter_screen/enter_screen/utils/input_parser.dart';
 import 'package:linum_enter_screen/enter_screen/utils/supported_dates.dart';
+import 'package:linum_enter_screen/enter_screen/utils/supported_repeat_configs.dart';
 
 TextEditingValue insertSuggestion(
     MapEntry<String, String> entry, String oldText, int oldCursor) {
@@ -100,7 +102,7 @@ Map<String, String> suggestCategory(String text) {
 Map<String, String> suggestDate(String text) {
   final Map<String, String> suggestions = {};
   final lowercase = text.toLowerCase();
-  print(supportedDates);
+
   for (final entry in supportedDates.entries) {
     String? substr;
     if (entry.key.length > text.length) {
@@ -117,6 +119,21 @@ Map<String, String> suggestDate(String text) {
 }
 
 Map<String, String> suggestRepeatInfo(String text) {
+  final Map<String, String> suggestions = {};
+  final lowercase = text.toLowerCase();
+
+  for (final entry in supportedRepeatIntervals.entries) {
+    String? substr;
+    if (entry.key.length > text.length) {
+      substr = entry.key.substring(0, text.length);
+    }
+
+    if (substr == lowercase && repeatConfigurations[entry.value] != null) {
+      suggestions[entry.value.name] =
+          repeatConfigurations[entry.value]!.label.tr();
+    }
+  }
+
   return {};
 }
 

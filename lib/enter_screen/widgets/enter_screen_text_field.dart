@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:linum_enter_screen/enter_screen/constants/parsable_date_map.dart';
-import 'package:linum_enter_screen/enter_screen/enums/week_day.dart';
+import 'package:linum_enter_screen/enter_screen/enums/parsable_date.dart';
 import 'package:linum_enter_screen/enter_screen/utils/input_parser.dart';
 import 'package:linum_enter_screen/enter_screen/models/enter_screen_input.dart';
 import 'package:linum_enter_screen/enter_screen/utils/example_string_builder.dart';
@@ -106,24 +106,18 @@ class _EnterScreenTextFieldState extends State<EnterScreenTextField> {
             child: Flex(
               direction: Axis.horizontal,
               children: [
-                DecoratedBox(
-                  decoration: const BoxDecoration(color: Colors.amber),
-                  child: Text(
-                    exampleStringBuilder.value.item1,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.transparent,
-                    ),
+                Text(
+                  exampleStringBuilder.value.item1,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.transparent,
                   ),
                 ),
-                DecoratedBox(
-                  decoration: const BoxDecoration(color: Colors.teal),
-                  child: Text(
-                    exampleStringBuilder.value.item2,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.black45,
-                    ),
+                Text(
+                  exampleStringBuilder.value.item2,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.black26,
                   ),
                 ),
               ],

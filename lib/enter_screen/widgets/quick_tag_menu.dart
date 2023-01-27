@@ -60,9 +60,7 @@ class _QuickTagMenuState extends State<QuickTagMenu> {
         textColor: widget.colors.category,
       ),
       TagSelectorButton(
-        title: tr(
-          viewModel.repeatInfo ?? "enter_screen.label-repeat-none",
-        ),
+        title: tr(viewModel.repeatInfo.label),
         symbol: "",
         onTap: () => {print("Select RepeatInfo")},
         textColor: widget.colors.repeatInfo,
