@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:linum_enter_screen/enter_screen/constants/parsable_date_map.dart';
 import 'package:linum_enter_screen/enter_screen/enums/parsable_date.dart';
+import 'package:linum_enter_screen/enter_screen/models/suggestion.dart';
 import 'package:linum_enter_screen/enter_screen/utils/input_parser.dart';
 import 'package:linum_enter_screen/enter_screen/models/enter_screen_input.dart';
 import 'package:linum_enter_screen/enter_screen/utils/example_string_builder.dart';
-import 'package:linum_enter_screen/enter_screen/utils/suggestions.dart';
+import 'package:linum_enter_screen/enter_screen/utils/suggestions/insert_suggestion.dart';
+import 'package:linum_enter_screen/enter_screen/utils/suggestions/make_suggestions.dart';
 import 'package:linum_enter_screen/enter_screen/view_models/enter_screen_view_model.dart';
-import 'package:linum_enter_screen/enter_screen/widgets/enter_screen_suggestion_list.dart';
+import 'package:linum_enter_screen/enter_screen/widgets/suggestion_list.dart';
 import 'package:provider/provider.dart';
 
 class EnterScreenTextField extends StatefulWidget {
@@ -22,7 +24,7 @@ class _EnterScreenTextFieldState extends State<EnterScreenTextField> {
   late EnterScreenViewModel _viewModel;
   final GlobalKey _key = LabeledGlobalKey("text_field");
   OverlayEntry? _overlayEntry;
-  Map<String, String> suggestions = {};
+  Map<String, Suggestion> suggestions = {};
   final exampleStringBuilder = ExampleStringBuilder(
       defaultAmount: 0.00,
       defaultCurrency: "EUR",
@@ -69,9 +71,16 @@ class _EnterScreenTextFieldState extends State<EnterScreenTextField> {
     _viewModel.setInput(parsed);
   }
 
-  void _onSuggestionSelection(MapEntry<String, String> entry) {
+  void _onSuggestionSelection(
+    Suggestion suggestion,
+    Suggestion? parentSuggestion,
+  ) {
     final value = insertSuggestion(
-        entry, _controller.text, _controller.selection.base.offset);
+      suggestion: suggestion,
+      oldText: _controller.text,
+      oldCursor: _controller.selection.base.offset,
+      parentSuggestion: parentSuggestion,
+    );
     _controller.value = value;
     _onChange(value.text, value.selection.base.offset);
   }
@@ -88,7 +97,7 @@ class _EnterScreenTextFieldState extends State<EnterScreenTextField> {
         width: size.width,
         child: Material(
           borderRadius: const BorderRadius.all(Radius.circular(5)),
-          child: EnterScreenSuggestionList(
+          child: SuggestionList(
             suggestions: suggestions,
             onSelection: _onSuggestionSelection,
           ),

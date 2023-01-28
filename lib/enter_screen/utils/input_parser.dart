@@ -31,7 +31,6 @@ EnterScreenInput parse(String? input) {
   final amount = splits[0];
   final result = parseAmount(amount, input);
 
-  print(splits);
   for (var i = 1; i < splits.length; i++) {
     final parsed = interpretTag(splits[i]);
     if (parsed != null) {
