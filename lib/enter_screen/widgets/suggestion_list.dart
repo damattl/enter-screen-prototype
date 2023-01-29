@@ -11,6 +11,7 @@ void _onSelection(
 
 class SuggestionList extends StatelessWidget {
   final Map<String, Suggestion> suggestions;
+  final double maxHeight;
   final void Function(
     Suggestion suggestion,
     Suggestion? parentSuggestion,
@@ -20,6 +21,7 @@ class SuggestionList extends StatelessWidget {
     super.key,
     required this.suggestions,
     this.onSelection = _onSelection,
+    this.maxHeight = 200,
   });
 
   @override
@@ -48,22 +50,24 @@ class SuggestionList extends StatelessWidget {
           children: [
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(12),
               decoration: const BoxDecoration(
                 color: Color(0xFFD9D9D9),
-                borderRadius: BorderRadius.all(Radius.circular(5)),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(5)),
               ),
               child: Text(
                 parentSuggestion.display(tr),
                 textAlign: TextAlign.center,
                 style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
               ),
             ),
             Container(
-              constraints: const BoxConstraints(
-                maxHeight: 250,
+              constraints: BoxConstraints(
+                maxHeight: maxHeight,
               ),
               child: ListView(
                 padding: const EdgeInsets.all(0),
@@ -84,8 +88,8 @@ class SuggestionList extends StatelessWidget {
     }
 
     return Container(
-      constraints: const BoxConstraints(
-        maxHeight: 250,
+      constraints: BoxConstraints(
+        maxHeight: maxHeight,
       ),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(5)),

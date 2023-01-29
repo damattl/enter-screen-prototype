@@ -68,7 +68,7 @@ class _EnterScreenTextFieldState extends State<EnterScreenTextField> {
       suggestions = makeSuggestions(text, cursor);
       _rebuildSuggestionList();
     });
-    _viewModel.setInput(parsed);
+    _viewModel.data.setFromInput(parsed);
   }
 
   void _onSuggestionSelection(
@@ -91,8 +91,10 @@ class _EnterScreenTextFieldState extends State<EnterScreenTextField> {
     Offset position,
   ) {
     return OverlayEntry(builder: (context) {
+      print(position.dy);
+      print(size);
       return Positioned(
-        bottom: position.dy + (size.height * 1.2),
+        bottom: position.dy - (size.height * 5.2), // TODO: Still a bit fishy
         left: position.dx,
         width: size.width,
         child: Material(

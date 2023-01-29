@@ -11,12 +11,12 @@ void main() async {
     supportedLocales: const [Locale("de", "DE")],
     path: 'lang',
     fallbackLocale: const Locale('de', 'DE'),
-    child: const MyApp(),
+    child: const EnterScreenPrototype(),
   ));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class EnterScreenPrototype extends StatelessWidget {
+  const EnterScreenPrototype({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,24 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const EnterScreen(),
+      home: const MainPage(),
+    );
+  }
+}
+
+class MainPage extends StatelessWidget {
+  const MainPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("EnterScreen"),
+      ),
+      body: const Align(
+        alignment: Alignment.bottomCenter,
+        child: EnterScreen(),
+      ),
     );
   }
 }
